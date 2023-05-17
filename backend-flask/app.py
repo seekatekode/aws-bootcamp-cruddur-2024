@@ -73,7 +73,7 @@ app = Flask(__name__)
 
 region=os.getenv("AWS_DEFAULT_REGION")
 app.logger.debug("AWS_DEFAULT_REGION is: ")
-app.logger.debug(AWS_DEFAULT_REGION)
+app.logger.debug(region)
 
 cognito_jwt_token = CognitoJwtToken(
   user_pool_id=os.getenv("AWS_COGNITO_USER_POOL_ID"),
