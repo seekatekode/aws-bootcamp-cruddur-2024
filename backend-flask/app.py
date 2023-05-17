@@ -17,13 +17,13 @@ from services.show_activity import *
 from lib.cognito_jwt_token import CognitoJwtToken, extract_access_token, TokenVerifyError
 
 # HoneyComb ----------
-from opentelemetry import trace
-from opentelemetry.instrumentation.flask import FlaskInstrumentor
-from opentelemetry.instrumentation.requests import RequestsInstrumentor
-from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProcessor
+#from opentelemetry import trace
+#from opentelemetry.instrumentation.flask import FlaskInstrumentor
+#from opentelemetry.instrumentation.requests import RequestsInstrumentor
+#from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+#from opentelemetry.sdk.trace import TracerProvider
+#from opentelemetry.sdk.trace.export import BatchSpanProcessor
+#from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProcessor
 
 # X-RAY ---------
 from aws_xray_sdk.core import xray_recorder
@@ -51,9 +51,9 @@ from flask import got_request_exception
 
 # HoneyComb ------------
 # Initialize tracing and an exporter that can send data to Honeycomb
-provider = TracerProvider()
-processor = BatchSpanProcessor(OTLPSpanExporter())
-provider.add_span_processor(processor)
+#provider = TracerProvider()
+#processor = BatchSpanProcessor(OTLPSpanExporter())
+#provider.add_span_processor(processor)
 
 # X-RAY ---------
 #xray_url = os.getenv("AWS_XRAY_URL")
@@ -81,8 +81,8 @@ cognito_jwt_token = CognitoJwtToken(
 
 # HoneyComb -----
 # Initialize automatic instrumentation with Flask
-FlaskInstrumentor().instrument_app(app)
-RequestsInstrumentor().instrument()
+#FlaskInstrumentor().instrument_app(app)
+#RequestsInstrumentor().instrument()
 
 
 frontend = os.getenv('FRONTEND_URL')
