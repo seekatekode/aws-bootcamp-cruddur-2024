@@ -64,11 +64,16 @@ from flask import got_request_exception
 #simple_processor = SimpleSpanProcessor(ConsoleSpanExporter())
 #provider.add_span_processor(simple_processor)
 
-trace.set_tracer_provider(provider)
-tracer = trace.get_tracer(__name__)
+#trace.set_tracer_provider(provider)
+#tracer = trace.get_tracer(__name__)
 
 app = Flask(__name__)
 
+
+
+region=os.getenv("AWS_DEFAULT_REGION")
+app.logger.debug("AWS_DEFAULT_REGION is: ")
+app.logger.debug(AWS_DEFAULT_REGION)
 
 cognito_jwt_token = CognitoJwtToken(
   user_pool_id=os.getenv("AWS_COGNITO_USER_POOL_ID"),
