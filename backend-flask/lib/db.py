@@ -89,6 +89,7 @@ class Db:
         cur.execute(sql,params)
         json = cur.fetchone()
         return json[0]
+        
   def query_wrap_object(self,template):
     sql = f"""
     (SELECT COALESCE(row_to_json(object_row),'{{}}'::json) FROM (

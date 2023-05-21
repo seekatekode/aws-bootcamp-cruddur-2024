@@ -4,7 +4,6 @@ import boto3
 import sys
 import json
 import os
-import datetime
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 parent_path = os.path.abspath(os.path.join(current_path, '..', '..', '..'))
@@ -28,11 +27,10 @@ def get_my_user_uuid():
       users.uuid
     FROM users
     WHERE
-      users.handle = %(handle)s;
-      {}
+      users.handle =%(handle)s
   """
   uuid = db.query_value(sql,{
-    'handle':  'Marie'
+    'handle':  'andrewbrown'
   })
   return uuid
 
