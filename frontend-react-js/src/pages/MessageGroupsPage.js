@@ -1,4 +1,4 @@
-import './MessageGroupPage.css';
+import './MessageGroupsPage.css';
 import React from "react";
 import { useParams } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ import MessageGroupFeed from '../components/MessageGroupFeed';
 import MessagesFeed from '../components/MessageFeed';
 import MessagesForm from '../components/MessageForm';
 
-export default function MessageGroupPage() {
+export default function MessageGroupsPage() {
   const [messageGroups, setMessageGroups] = React.useState([]);
   const [messages, setMessages] = React.useState([]);
   const [popped, setPopped] = React.useState([]);
@@ -32,7 +32,7 @@ export default function MessageGroupPage() {
         console.log(res)
       }
     } catch (err) {
-      console.log(err);
+    console.log(err);
     }
   };  
 
@@ -61,7 +61,6 @@ export default function MessageGroupPage() {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
 
-    loadMessageGroupsData();
     loadMessageGroupData();
     checkAuth(setUser);
   }, [])

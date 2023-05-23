@@ -20,7 +20,6 @@ message_group_uuid = "5ae290ed-55d1-47a0-bc6d-fe2bc2700399"
 
 year = str(datetime.datetime.now().year)
 # define the query parameters
-current_year = datetime.datetime.now().year
 query_params = {
   'TableName': table_name,
   'ScanIndexForward': False,
