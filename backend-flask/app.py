@@ -4,7 +4,6 @@ from flask_cors import CORS, cross_origin
 import os
 import sys
 
-from services.users_short import *
 from services.home_activities import *
 from services.notifications_activities import *
 from services.user_activities import *
@@ -110,7 +109,7 @@ cors = CORS(
 
 # Rollbar ----------
 rollbar_access_token = os.getenv('ROLLBAR_ACCESS_TOKEN')
-@app.before_first_request
+#@app.before_first_request
 def init_rollbar():
     """init rollbar module"""
     rollbar.init(

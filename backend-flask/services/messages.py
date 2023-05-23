@@ -22,5 +22,5 @@ class Messages:
     print(data)
 
 
-    model['data'] = results
+    model['data'] = data
     return model
