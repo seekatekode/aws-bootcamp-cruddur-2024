@@ -28,7 +28,7 @@ def get_user_uuids():
       users.handle
     FROM users
     WHERE
-      users.handle IN(
+    users.handle IN(
         %(my_handle)s,
         %(other_handle)s
         )
@@ -87,7 +87,7 @@ def create_message(client,message_group_uuid, created_at, message, my_user_uuid,
  print(response)
 
 
-message_group_uuid = "5ae290ed-55d1-47a0-bc6d-fe2bc2700399" #str(uuid.uuid4())
+message_group_uuid = "689c2c72-231b-43dd-84a6-50dc65bdc9d6" #str(uuid.uuid4())
 now = datetime.now(timezone.utc).astimezone()
 users = get_user_uuids()
 
@@ -221,6 +221,8 @@ Person 2: Definitely. I think his character is a great example of the show's abi
 """
 
 lines = conversation.lstrip('\n').rstrip('\n').split('\n')
+
+
 for i in range(len(lines)):
    if lines[i].startswith('Person 1: '):
      key = 'my_user'
@@ -234,11 +236,11 @@ for i in range(len(lines)):
 
    created_at = (now + timedelta(minutes=i)).isoformat()
    create_message(
-        client=ddb,
-        message_group_uuid= message_group_uuid,
-        created_at=created_at,
-        message=message,
-        my_user_uuid=users[key]['uuid'],
-        my_user_display_name=users[key]['display_name'],
-        my_user_handle=users[key]['handle']
-      )
+     client=ddb,
+     message_group_uuid= message_group_uuid,
+     created_at=created_at,
+     message=message,
+     my_user_uuid=users[key]['uuid'],
+     my_user_display_name=users[key]['display_name'],
+     my_user_handle=users[key]['handle']
+   )
