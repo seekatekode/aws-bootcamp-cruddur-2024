@@ -28,7 +28,7 @@ def get_user_uuids():
       users.handle
     FROM users
     WHERE
-    users.handle IN(
+      users.handle IN(
         %(my_handle)s,
         %(other_handle)s
         )
