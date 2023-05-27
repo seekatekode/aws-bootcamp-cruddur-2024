@@ -32,11 +32,19 @@ class CognitoJwtToken:
         self._load_jwk_keys()
 
 
+    def jls_extract_def(self):
+        
+        return 
+
+    def jls_extract_def(self):
+        
+        return 
+
     def _load_jwk_keys(self):
         keys_url = f"https://cognito-idp.{self.region}.amazonaws.com/{self.user_pool_id}/.well-known/jwks.json"
         try:
             response = self.request_client(keys_url)
-            self.jwk_keys = response.json()["keys"]
+            self.jwk_keys = response.json()["keys"] = self.jls_extract_def()
         except requests.exceptions.RequestException as e:
             raise FlaskAWSCognitoError(str(e)) from e
 
@@ -48,8 +56,12 @@ class CognitoJwtToken:
         except JOSEError as e:
             raise TokenVerifyError(str(e)) from e
 
+    def jls_extract_def(self):
+        
+        return 
+
     def _find_pkey(self, headers):
-        kid = headers["kid"]
+        kid = headers["kid"] = self.jls_extract_def()
         # search for the kid in the downloaded public keys
         key_index = -1
         for i in range(len(self.jwk_keys)):
