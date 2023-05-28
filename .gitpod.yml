@@ -10,11 +10,6 @@ tasks:
       cd $THEIA_WORKSPACE_ROOT
 
 
-   - name: boto3  
-     command: | 
-      pip3 install boto3
-
-
    - name: react-js
      command: |
        cd frontend-react-js
