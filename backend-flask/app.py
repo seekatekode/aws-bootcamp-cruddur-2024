@@ -156,8 +156,8 @@ def data_messages(message_group_uuid):
   access_token = extract_access_token(request.headers)
   try:
     claims = cognito_jwt_token.verify(access_token)
-    # authenticated request
-    app.logger.debug("authenticated")
+    # authenicated request
+    app.logger.debug("authenicated")
     app.logger.debug(claims)
     cognito_user_id = claims['sub']
     model = Messages.run(
@@ -218,12 +218,13 @@ def data_create_message():
 def data_home():
   access_token = extract_access_token(request.headers)
   try:
-     claims = cognito_jwt_token.verify(access_token)
+    claims = cognito_jwt_token.verify(access_token)
+    print("Claims:", claims) 
      # authenticated request 
-     app.logger.debug("authenticated")
-     app.logger.debug(claims)
-     app.logger.debug(claims['username'])
-     data = HomeActivities.run(cognito_user_id=claims['username'])
+    app.logger.debug("authenticated")
+    app.logger.debug(claims)
+    app.logger.debug(claims['username'])
+    data = HomeActivities.run(cognito_user_id=claims['username'])
   except TokenVerifyError as e:
      # unauthenticated request
      app.logger.debug(e)
