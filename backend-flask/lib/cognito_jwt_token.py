@@ -5,10 +5,10 @@ from jose.exceptions import JOSEError
 from jose.utils import base64url_decode
 
 class FlaskAWSCognitoError(Exception):
-  pass
+    pass
 
 class TokenVerifyError(Exception):
-  pass
+    pass
 
 def extract_access_token(request_headers):
     access_token = None
