@@ -4,6 +4,7 @@ from flask_cors import CORS, cross_origin
 import os
 import sys
 
+from services.users_short import *
 from services.home_activities import *
 from services.notifications_activities import *
 from services.user_activities import *
@@ -221,16 +222,16 @@ def data_home():
   try:
     claims = cognito_jwt_token.verify(access_token)
     print("Claims:", claims) 
-     # authenticated request 
-    app.logger.debug("authenicated")
+    # authenticated request 
+    app.logger.debug("authenticated")
     app.logger.debug(claims)
     app.logger.debug(claims['username'])
     data = HomeActivities.run(cognito_user_id=claims['username'])
   except TokenVerifyError as e:
-     # unauthenticated request
-     app.logger.debug(e)
-     app.logger.debug("unauthenicated")
-     data = HomeActivities.run() 
+      # unauthenticated request
+      app.logger.debug(e)
+      app.logger.debug("unauthenticated")
+      data = HomeActivities.run() 
   return data, 200
 
 @app.route("/api/activities/notifications", methods=['GET'])
