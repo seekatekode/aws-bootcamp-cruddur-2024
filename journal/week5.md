@@ -160,3 +160,7 @@ Description: After running the INSERT INTO public.users command to import messag
 
 
 ![1ED097E5-9F29-47AA-BCF1-C8D733059A12_1_105_c](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/fd1a012b-6247-4465-91fe-340048785d87)
+
+
+![5524629F-6C97-4258-A8CF-8DFB831852A5](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/29efbd3b-9763-4dec-9bd3-814e69c7eb47)
+
