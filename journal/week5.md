@@ -144,8 +144,8 @@ Description: I encountered difficulties retrieving the Cognito JWT token and Cog
 Solution: After careful examination of the AWS Cognito documentation and troubleshooting, I was able to successfully retrieve the necessary Cognito JWT token and Cognito User ID by implementing the appropriate API calls and configurations.
 
 **2. Issue:** `./bin/db/update_cognito_user_ids`
-Description: When running the ./bin/db/update_cognito_user_ids command, I received an error message stating that the original AWS_SECRET_ACCESS_KEY and AWS_ACCESS_KEY_ID were no longer valid.
-**Solution:** Upon investigation, I discovered that the issue arose due to special characters present in the AWS_SECRET_ACCESS_KEY. To resolve this, I regenerated a new AWS_SECRET_ACCESS_KEY without any special characters, allowing me to successfully run the update command and retrieve the desired results.
+Description: When running the ./bin/db/update_cognito_user_ids command, I received an error message stating that the original `AWS_SECRET_ACCESS_KEY` and `AWS_ACCESS_KEY_ID` were no longer valid.
+**Solution:** Upon investigation, I discovered that the issue arose due to special characters present in the `AWS_SECRET_ACCESS_KEY`. To resolve this, I regenerated a new `AWS_SECRET_ACCESS_KEY` without any special characters, allowing me to successfully run the update command and retrieve the desired results.
 
 **3. Issue:** `./bin/db/seed` and `./bin/ddb/seed`
 Description: I encountered difficulties with the `./bin/db/seed` and `./bin/ddb/seed` scripts, resulting in errors during the data seeding process.
