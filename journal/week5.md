@@ -25,7 +25,7 @@
 
 ![Image 5-9-23 at 4 45 PM](https://github.com/kodexkate/aws-bootcamp-cruddur-2023/assets/122316410/d5693adf-58f9-4bfa-881f-5179c93de780)
 
-**Even after running ./bin/db/update_cognito_user_ids the cognito user id was not updating, so it remained to display 'MOCK'. I couldn't figure out why this was not updating,so I decides to return to this issue later.**
+**Even after running `./bin/db/update_cognito_user_ids` the cognito user id was not updating, so it remained to display 'MOCK'. I couldn't figure out why this was not updating,so I decided to return to this issue later.**
 
 
 ![Image 5-9-23 at 5 09 PM](https://github.com/kodexkate/aws-bootcamp-cruddur-2023/assets/122316410/b70a623f-af4f-4678-8d05-2ab74afa9e2d)
@@ -115,6 +115,7 @@ Updated `ddb.py`
 **I was having issues with loading the Messages page, but when viewing the frontend logs I couldn't figure out what the issue was, so I inspected the page and found that `set user` was not defined in my `MessageGroupsPage.js`. I updated this file and the Messages page finally loaded!**
 
 
+
 ![Image 5-11-23 at 11 20 AM](https://github.com/kodexkate/aws-bootcamp-cruddur-2023/assets/122316410/147123e2-f91d-4b53-97d7-0ebd207572d2)
 
 
@@ -136,8 +137,26 @@ Updated `ddb.py`
 
 **I identified the required scripts, including scripts to create tables, insert sample data, query data, and delete tables. I used the AWS SDK to interact with DynamoDB and implemented error handling and logging to aid in debugging. The utility scripts allowed me to automate the setup and teardown process and enabled me to easily test and debug the data model and implementation.**
 
+ **I encountered several issues while working on my project, but I managed to overcome them through perseverance and problem-solving. Here's a summary of the challenges I faced and the solutions I implemented:**
+ 
+ **1. Issue:** `Cognito JWT Token` and `Cognito User ID`
+Description: I encountered difficulties retrieving the Cognito JWT token and Cognito User ID required for authentication and authorization.
+Solution: After careful examination of the AWS Cognito documentation and troubleshooting, I was able to successfully retrieve the necessary Cognito JWT token and Cognito User ID by implementing the appropriate API calls and configurations.
+
+**2. Issue:** `./bin/db/update_cognito_user_ids`
+Description: When running the ./bin/db/update_cognito_user_ids command, I received an error message stating that the original AWS_SECRET_ACCESS_KEY and AWS_ACCESS_KEY_ID were no longer valid.
+**Solution:** Upon investigation, I discovered that the issue arose due to special characters present in the AWS_SECRET_ACCESS_KEY. To resolve this, I regenerated a new AWS_SECRET_ACCESS_KEY without any special characters, allowing me to successfully run the update command and retrieve the desired results.
+
+**3. Issue:** `./bin/db/seed` and `./bin/ddb/seed`
+Description: I encountered difficulties with the `./bin/db/seed` and `./bin/ddb/seed` scripts, resulting in errors during the data seeding process.
+**Solution:** To overcome these issues, I carefully reviewed the seed scripts and identified the syntax errors that were causing the problems. After making the necessary corrections, I successfully ran the scripts, ensuring the proper seeding of the required data. 
+
+**4. Issue:** `Londo's Message Not Appearing`
+Description: After running the INSERT INTO public.users command to import messages, I noticed that Londo's message was not appearing as expected.
+**Solution:** By clearing the message group UUID from the URL and appending /messages/new/londo to the frontend address, I was able to access the message creation page specifically for Londo. Sending a message from there helped import Londo's message above the other user's message, resolving the issue.
 
 
+![6C8B13BB-8034-4CCB-9452-E44DA36E01C7_1_105_c](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/eedd90d2-e6fe-49d9-a72b-d4497e4c9cc4)
 
 
-
+![1ED097E5-9F29-47AA-BCF1-C8D733059A12_1_105_c](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/fd1a012b-6247-4465-91fe-340048785d87)
