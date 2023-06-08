@@ -25,7 +25,7 @@
 
 ![Image 5-9-23 at 4 45 PM](https://github.com/kodexkate/aws-bootcamp-cruddur-2023/assets/122316410/d5693adf-58f9-4bfa-881f-5179c93de780)
 
-**Even after running ./bin/db/update_cognito_user_ids the cognito user id was not updating, so it remained to display 'MOCK'. I couldn't figure out why this was not updating,so I decided to return to this issue later.**
+**Even after running `./bin/db/update_cognito_user_ids` the cognito user id was not updating, so it remained to display 'MOCK'. I couldn't figure out why this was not updating,so I decided to return to this issue later.**
 
 
 ![Image 5-9-23 at 5 09 PM](https://github.com/kodexkate/aws-bootcamp-cruddur-2023/assets/122316410/b70a623f-af4f-4678-8d05-2ab74afa9e2d)
@@ -147,7 +147,7 @@ Description: When running the ./bin/db/update_cognito_user_ids command, I receiv
 **Solution:** Upon investigation, I discovered that the issue arose due to special characters present in the AWS_SECRET_ACCESS_KEY. To resolve this, I regenerated a new AWS_SECRET_ACCESS_KEY without any special characters, allowing me to successfully run the update command and retrieve the desired results.
 
 **3. Issue:** `./bin/db/seed` and `./bin/ddb/seed`
-Description: I encountered difficulties with the ./bin/db/seed and ./bin/ddb/seed scripts, resulting in errors during the data seeding process.
+Description: I encountered difficulties with the `./bin/db/seed` and `./bin/ddb/seed` scripts, resulting in errors during the data seeding process.
 **Solution:** To overcome these issues, I carefully reviewed the seed scripts and identified the syntax errors that were causing the problems. After making the necessary corrections, I successfully ran the scripts, ensuring the proper seeding of the required data.
 
 **4. Issue:** `Londo's Message Not Appearing`
