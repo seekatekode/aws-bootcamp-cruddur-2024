@@ -164,3 +164,39 @@ Description: After running the INSERT INTO public.users command to import messag
 
 ![5524629F-6C97-4258-A8CF-8DFB831852A5](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/29efbd3b-9763-4dec-9bd3-814e69c7eb47)
 
+
+## Implement DynamoDB Stream with AWS Lambda
+
+- Working in the AWS console using dynamoDB, I added a trigger to execute a Lambda function which can trackes errors and monitor functions in the dynamoDB stream.
+
+I Commented the  `AWS_ENDPOINT_URL` in `docker-compose.yml`, then composed down, then up.
+
+Updated `./bin/ddb/schema-load` with a Global Secondary Index (GSI) and run `./bin/ddb/schema-load prod`, Which created a dynamoDB table named `cruddur-messages` This was created in my AWS console.
+
+On AWS in DynamoDB > Tables > cruddur-messages > Turn on DynamoDB stream, choose "NEW IMAGE"
+
+On AWS in the VPC console, create an endpoint named `ddb-cruddur`, choose services with DynamoDB, and select the default VPC and route table.
+
+On AWS in the Lambda console, create a new function named `cruddur-messaging-stream-1` and enable VPC in its advanced settings; deploy the code as seen in `aws/lambdas/cruddur-messaging-stream.py`; add permission of `AWSLambdaInvocation-DynamoDB` to the Lambda IAM role; more permissions can be added by creating inline policies as seen in `aws/policies/cruddur-message-stream-policy.json`
+
+On AWS in the DynamoDB console, create a new trigger and select `cruddur-messaging-stream-1`
+
+Initially, when I accessed the messages tab, it appeared empty since there was no existing data in our AWS DynamoDB. To address this, I took the initiative to generate a fresh message in a newly created message group involving Londo and Granite. To accomplish this, I utilized a specific URL that allowed me to perform the necessary actions (`https://<frontend_address>/messages/new/londo` and `https://3000-seekatekode-awsbootcamp-vu55gubgiiu.ws-us99.gitpod.io/messages/new/Granite`) and it worked!
+
+![9CA13316-B23F-40D8-8CBD-82A70368BC08](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/3dd2da64-2b28-4953-82bc-ec2699d2278d)
+
+**I received all logs with no errors at first, but then when I created new logs, it only showed the first test messages repeatedly even after deleting each log before sending a new message to Londo or Granite. I could not figure out why the new messages were not showing in the logs, so I decided to proceed since I was getting some logs.**
+
+![E5BE02D2-9C6C-4038-B13D-AAB5A29261D8](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/7e193f96-d9e1-42e0-beb0-f9a73d6851a0)
+
+![CB0A67ED-B456-479B-9C05-6108277025F5](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/b3e69ab2-a72f-4f9c-868c-6f1b3c2ae018)
+
+**Saved Lambda code to `cruddur-messaging-stream.py`**
+
+**Added three actions to inline policy after deleting the full access permission:  `Read: Query`, `Write: DeleteItem`, and `Write: PutItem`**
+
+**When I clicked on `View table details` in DynamoDB I was able to see the messages that would not appear in my Cloudwatch logs**
+
+![B467AAA9-970E-4CCF-9A0D-8603B8688700](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/84f26ca7-fbb5-4215-86cd-f8fad9eae79d)
+
+
