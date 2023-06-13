@@ -1,7 +1,7 @@
 # Week 6 — Deploying Containers
 ## Test RDS Connecetion
 
-Add this `test` script into `db` so we can easily check our connection from our container.
+We added this `test` script into `db` so we can easily check our connection from our container. Then ran `chmod u+x backend-flask/bin/db/test`
 
 ```sh
 #!/usr/bin/env python3
@@ -23,9 +23,16 @@ finally:
   conn.close()
 ```
 
+![F2037F1A-A306-4CB3-BEF0-FFCBFFAE9298](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/11846a5a-ad69-45b8-92ea-d9f25cdd89fa)
+
+ **Running ./bin/db/test was successful right away soon as I composed up.**
+ 
+ ![FF97ACD5-31CC-419D-8EA4-183658EC8C83](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/1f4d29ea-5f83-497d-a0f0-8a91d6056734)
+
+
 ## Task Flask Script
 
-We'll add the following endpoint for our flask app:
+We added the following endpoint for our flask app:
 
 ```py
 @app.route('/api/health-check')
