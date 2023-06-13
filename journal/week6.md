@@ -1,7 +1,7 @@
 # Week 6 — Deploying Containers
 ## Test RDS Connecetion
 
-Add this `test` script into `db` so we can easily check our connection from our container.
+We added this `test` script into `db` so we can easily check our connection from our container. Then ran `chmod u+x backend-flask/bin/db/test`
 
 ```sh
 #!/usr/bin/env python3
@@ -23,9 +23,22 @@ finally:
   conn.close()
 ```
 
+![F2037F1A-A306-4CB3-BEF0-FFCBFFAE9298](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/11846a5a-ad69-45b8-92ea-d9f25cdd89fa)
+
+Then ran `chmod u+x backend-flask/bin/db/test` , added `PROD` to `connection_url = os.getenv("CONNECTION_URL")`
+
+ **Running ./bin/db/test was not successful unless I remove `PROD` ,THEN right away.**
+ 
+ ![FF97ACD5-31CC-419D-8EA4-183658EC8C83](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/1f4d29ea-5f83-497d-a0f0-8a91d6056734)
+
+We then ran `export GITPOD_IP=$(curl ifconfig.me)`, then `./bin/rds/update-sg-rule`. This command did not work for me, so I received the error `An error occurred (InvalidGroupId.Malformed) when calling the ModifySecurityGroupRules operation: Invalid id: "sg-0b3b...`. Since this did not work, I wasn't able to receive `Connection successful` after running `./bin/db/test`I reached out in Discord after trying a few steps with no luck and it was determined my inbound rules were not set correctly. 
+
+
+
+
 ## Task Flask Script
 
-We'll add the following endpoint for our flask app:
+We added the following endpoint for our flask app:
 
 ```py
 @app.route('/api/health-check')
@@ -33,7 +46,11 @@ def health_check():
   return {'success': True}, 200
 ```
 
-We'll create a new bin script at `bin/flask/health-check`
+
+![DC631736-904B-4CE0-8912-9E726F4D1A4F](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/e76e144e-6e26-4b7a-bc69-8ef6ecc5e65d)
+
+
+We then created a new bin script at `bin/flask/health-check` and ran `chmod u+x ./bin/flask/health-check` 
 
 ```py
 #!/usr/bin/env python3
@@ -46,6 +63,9 @@ if response.getcode() == 200:
 else:
   print("Flask server is not running")
 ```
+
+![6493E777-D35E-4F90-933E-877436EDB8B8](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/283ef959-c9cb-4cf9-82d4-88b5af425083)
+
 
 ### NAT Instance
 
