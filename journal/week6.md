@@ -27,11 +27,11 @@ finally:
 
 Then ran `chmod u+x backend-flask/bin/db/test` , added `PROD` to `connection_url = os.getenv("CONNECTION_URL")`
 
- **Running ./bin/db/test was not successful unless I remove `PROD` ,THEN right away.**
+ **Running ./bin/db/test was not successful unless I remove `PROD` ,then it worked right away.**
  
  ![FF97ACD5-31CC-419D-8EA4-183658EC8C83](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/1f4d29ea-5f83-497d-a0f0-8a91d6056734)
 
-We then ran `export GITPOD_IP=$(curl ifconfig.me)`, then `./bin/rds/update-sg-rule`. This command did not work for me, so I received the error `An error occurred (InvalidGroupId.Malformed) when calling the ModifySecurityGroupRules operation: Invalid id: "sg-0b3b...`. Since this did not work, I wasn't able to receive `Connection successful` after running `./bin/db/test`I reached out in Discord after trying a few steps with no luck and it was determined my inbound rules were not set correctly. 
+We then ran `export GITPOD_IP=$(curl ifconfig.me)`, then `./bin/rds/update-sg-rule`. This command did not work for me, so I received the error `An error occurred (InvalidGroupId.Malformed) when calling the ModifySecurityGroupRules operation: Invalid id: "sg-0b3b...`. Since this did not work, I wasn't able to receive `Connection successful` after running `./bin/db/test` I reached out in Discord after trying a few steps with no luck and it was determined my inbound rules were not set correctly. 
 
 
 
@@ -64,7 +64,12 @@ else:
   print("Flask server is not running")
 ```
 
-![6493E777-D35E-4F90-933E-877436EDB8B8](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/283ef959-c9cb-4cf9-82d4-88b5af425083)
+![C4582FD0-F2FA-445B-89CA-8208B39DD6F1](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/1ecce3b4-9d2f-4d83-8444-849d27f2cb2f)
+
+**We then ran the command `/bin/flask/health-check` and it didn't pass the first multiple tries until I stopped the workspace overnight and restarted the same workspace the next morning.** 
+
+
+![66C73E96-4A57-4E8F-9C74-9930E0CB6821](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/0ecc1a22-218b-443b-be34-bb4d2ce46fa9)
 
 
 ### NAT Instance
