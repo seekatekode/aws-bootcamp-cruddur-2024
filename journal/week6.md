@@ -71,6 +71,70 @@ else:
 
 ![66C73E96-4A57-4E8F-9C74-9930E0CB6821](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/0ecc1a22-218b-443b-be34-bb4d2ce46fa9)
 
+![98C237A0-B05E-47E8-9AB0-B2A394B6B036_4_5005_c](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/e23c5c88-624d-4063-884a-e8661676dde9)
+
+
+
+## Create CloudWatch Log Group
+
+We then went over to AWS CloudWatch to create a new CloudWatch group. I attempted to run `aws logs create-log-group --log-group-name cruddur`, but received this error. 
+
+**An error occurred (ResourceAlreadyExistsException) when calling the CreateLogGroup operation: The specified log group already exists**
+
+When I checked AWS log groups the group called `cruddur` already existed, so I created another one called `/cruddur/fargate-cluster`and set the retention for `1 day` to keep the data from being stored for too long since this will be costly.
+
+`sh
+aws logs create-log-group --log-group-name "/cruddur/fargate-cluster"
+aws logs put-retention-policy --log-group-name "/cruddur/fargate-cluster" --retention-in-days 1`
+
+
+![7204D500-AA5D-41C7-8A87-E91A09E729AA](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/748def64-bb57-41b4-a3ee-800d721961b9)
+
+
+## Create ECS Cluster
+
+Using AWS CLI, we then created a ECS Cluster **to simplify the management, scalability, and availability of containerized applications, making it easier to deploy and run them efficiently in a distributed computing environment.**
+
+```sh
+aws ecs create-cluster \
+--cluster-name cruddur \
+--service-connect-defaults namespace=cruddur
+```
+
+<img width="1094" alt="Screenshot 2023-06-15 at 8 41 29 PM" src="https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/47194730-38ce-492c-980e-2024b0f62fb3">
+
+
+### Gaining Accesss to ECS Fargate Container
+
+## Create ECR repo and push image
+
+### Login to ECR
+
+```sh
+aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
+```
+
+### For Base-image python
+We ran this in `backend-flask` and it returned data. 
+
+```sh
+aws ecr create-repository \
+  --repository-name cruddur-python \
+  --image-tag-mutability MUTABLE
+```
+
+
+![10B66722-142C-4437-A2EB-61D2BF389616](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/e0f59590-b905-4043-96f7-250490f8f1e0)
+
+#### Set URL
+
+```sh
+export ECR_PYTHON_URL="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/cruddur-python"
+echo $ECR_PYTHON_URL
+```
+
+
+
 
 ### NAT Instance
 
