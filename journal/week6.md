@@ -128,10 +128,48 @@ aws ecr create-repository \
 
 #### Set URL
 
+We then set the URL. 
 ```sh
 export ECR_PYTHON_URL="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/cruddur-python"
 echo $ECR_PYTHON_URL
 ```
+
+#### Pull Image
+
+```sh
+docker pull python:3.10-slim-buster
+```
+
+![44C6778B-632C-40E1-BCC3-E8B3736D7CA4_4_5005_c](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/2ec667bc-7e43-4742-a96f-825f5752055d)
+
+#### Tag Image
+
+```sh
+docker tag python:3.10-slim-buster $ECR_PYTHON_URL:3.10-slim-buster
+```
+![DB33D826-5EA8-4EAE-B466-AB52D8EE889B](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/1c6b3332-6d11-4648-824e-7791943669d2)
+
+#### Push Image
+
+```sh
+docker push $ECR_PYTHON_URL:3.10-slim-buster
+```
+
+![1E0B6014-6052-490E-9656-F1A766E07E80_4_5005_c](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/f711d274-0468-41ed-9168-30408356f500)
+
+
+
+![8851C834-6FAB-478F-B82F-8B0AAE250183](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/77e7b656-d062-4c0e-b889-759ab248fa73)
+
+
+**We then updated the `Dockerfile`**
+
+
+![0229306D-FCBA-4404-ACA7-D5DC17F6D7F8_4_5005_c](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/667e0431-748f-473a-927a-ffd25457c928)
+
+
+**We then selected `Compose Up- Select Services`, selected `backend-flask` and `db` **
+
 
 
 
