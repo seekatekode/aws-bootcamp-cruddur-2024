@@ -341,3 +341,52 @@ Created a new folder called `aws/task-defintions` and added the following files,
   ]
 }
 ```
+
+
+### Register Task Defintion
+
+We registered the task definition for only the `backend-end`
+
+```sh
+aws ecs register-task-definition --cli-input-json file://aws/task-defintions/backend-flask.json
+```
+
+## Defaults
+
+```sh
+export DEFAULT_VPC_ID=$(aws ec2 describe-vpcs \
+--filters "Name=isDefault, Values=true" \
+--query "Vpcs[0].VpcId" \
+--output text)
+echo $DEFAULT_VPC_ID
+```
+
+```sh
+export DEFAULT_SUBNET_IDS=$(aws ec2 describe-subnets  \
+ --filters Name=vpc-id,Values=$DEFAULT_VPC_ID \
+ --query 'Subnets[*].SubnetId' \
+ --output json | jq -r 'join(",")')
+echo $DEFAULT_SUBNET_IDS
+```XDDDCX
+
+
+### Create Security Group
+
+
+```sh
+export CRUD_SERVICE_SG=$(aws ec2 create-security-group \
+  --group-name "crud-srv-sg" \
+  --description "Security group for Cruddur services on ECS" \
+  --vpc-id $DEFAULT_VPC_ID \
+  --query "GroupId" --output text)
+echo $CRUD_SERVICE_SG
+```
+
+
+```sh
+aws ec2 authorize-security-group-ingress \
+  --group-id $CRUD_SERVICE_SG \
+  --protocol tcp \
+  --port 80 \
+  --cidr 0.0.0.0/0
+```
