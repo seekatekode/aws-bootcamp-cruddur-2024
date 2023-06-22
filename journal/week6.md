@@ -395,18 +395,21 @@ aws ec2 authorize-security-group-ingress \
 
 ```" The selected task definition is not compatible with the selected compute strategy. "```
 
-I took a look at my code again and noticed it was missing a few pieces of code since I was using the json code for `task-definitions` via the  **week 6 fargate** instructions instead of the code from the week 6 repo. So in other words, the code wasn't exactly like Andrew's. After making these corrections I still wasn't able to create the service, but this time it was similar to Andrew's issue with permissions. I received this error: 
+I took a look at my code again and noticed it was missing a few pieces of code since I was using the json code for `task-definitions` via the  **week 6 fargate** instructions instead of the code from the week 6 repo. So in other words, the code wasn't exactly like Andrew's. After making these corrections I still wasn't able to create the service, but this time it was similar to Andrew's issue with permissions. 
 
-``
-"Task stopped at: 6/22/2023, 09:28:18 UTC
-ResourceInitializationError: unable to pull secrets or registry auth: execution resource retrieval failed: unable to retrieve ecr registry auth: service call has been retried 1 time(s): AccessDeniedException: User: arn:aws:sts::181.........:assumed-role/CruddurServiceExecutionRole/97e56dadd03045deaa5e8b6c688ec319 is not authorized to perform: ecr:GetAuthorizationToken on resource: * because no identity-based policy allows the ecr:GetAuthorizationToken action status code: 400, request id: 802fafcf-b0af-4d34-a105-67c8c3c9b153" ``
+### ERRORS THROWN WHEN ATTEMPTING TO DEPLOY/ CREATE SERVICE 
+
+**##ERROR 1**
+
+**"Task stopped at: 6/22/2023, 09:28:18 UTC
+ResourceInitializationError: unable to pull secrets or registry auth: execution resource retrieval failed: unable to retrieve ecr registry auth: service call has been retried 1 time(s): AccessDeniedException: User: arn:aws:sts::181.........:assumed-role/CruddurServiceExecutionRole/97e56dadd03045deaa5e8b6c688ec319 is not authorized to perform: ecr:GetAuthorizationToken on resource: * because no identity-based policy allows the ecr:GetAuthorizationToken action status code: 400, request id: 802fafcf-b0af-4d34-a105-67c8c3c9b153"**
 
 To resolve this error `CruddurServiceExecutionPolicy` had to be updated to include the permission `GetAuthorizationToken`. 
 
 
 ![F06A40ED-008C-4F26-9F28-672F9F4665AF](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/a2facfd7-3ed3-423d-984d-9c600ff406c4)
 
-**This was the next error thrown:**
+**##ERROR 2**
 
 "Task stopped at: 6/22/2023, 10:01:58 UTC
 ResourceInitializationError: failed to validate logger args: create stream has been retried 1 times: failed to create Cloudwatch log stream: AccessDeniedException: User: arn:aws:sts::1819......:assumed-role/CruddurServiceExecutionRole/3caf853ecb00491db67740079d4a02a7 is not authorized to perform: logs:CreateLogStream on resource: arn:aws:logs:us-east-1:181905276501:log-group:cruddur:log-stream:backend-flask/backend-flask/3caf853ecb00491db67740079d4a02a7 because no identity-based policy allows the logs:CreateLogStream action status code: 400, request id: 061e0f7c-b758-4b95-8fab-c791d3f8665e : exit status 1"
@@ -416,5 +419,16 @@ ResourceInitializationError: failed to validate logger args: create stream has b
 
 ![374CF3ED-311B-4552-940D-91B2565517E2](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/11a431d4-eaa3-4f4d-84c3-0a878bb8af4d)
 
+**##ERROR 3**
 
+"Task stopped at: 6/22/2023, 10:28:57 UTC
+CannotPullContainerError: pull image manifest has been retried 1 time(s): failed to resolve ref 181905276501.dkr.ecr.us-east-1.amazonaws.com/backend-flask:latest: pulling from host 181905276501.dkr.ecr.us-east-1.amazonaws.com failed with status code [manifests latest]: 403 Forbidden"
 
+**To resolve this issue we added these inline policies**
+
+```sh
+"ecr: BatchCheckLayerAvailability"
+"ecr: GetDownloadUrIForLayer",
+"ecr: BatchGetImage",
+"logs: CreateLogStream"
+"logs: PutLogEvents```
