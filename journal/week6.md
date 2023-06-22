@@ -390,3 +390,22 @@ aws ec2 authorize-security-group-ingress \
   --port 80 \
   --cidr 0.0.0.0/0
 ```
+
+**We then created a service via the AWS console. When I attempted to select the task definition it threw this error: 
+
+```" The selected task definition is not compatible with the selected compute strategy. "```
+
+I took a look at my code again and noticed it was missing a few pieces of code since I was using the json code for `task-definitions` via the  **week 6 fargate** instructions instead of the code from the week 6 repo. So in other words, the code wasn't exactly like Andrew's. After making these corrections I still wasn't able to create the service, but this time it was similar to Andrew's issue with permissions. I received this error: 
+
+``
+"Task stopped at: 6/22/2023, 09:28:18 UTC
+ResourceInitializationError: unable to pull secrets or registry auth: execution resource retrieval failed: unable to retrieve ecr registry auth: service call has been retried 1 time(s): AccessDeniedException: User: arn:aws:sts::181.........:assumed-role/CruddurServiceExecutionRole/97e56dadd03045deaa5e8b6c688ec319 is not authorized to perform: ecr:GetAuthorizationToken on resource: * because no identity-based policy allows the ecr:GetAuthorizationToken action status code: 400, request id: 802fafcf-b0af-4d34-a105-67c8c3c9b153" ``
+
+To resolve this error `CruddurServiceExecutionPolicy` had to be updated to include the permission `GetAuthorizationToken`. 
+
+
+![F06A40ED-008C-4F26-9F28-672F9F4665AF](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/a2facfd7-3ed3-423d-984d-9c600ff406c4)
+
+
+
+
