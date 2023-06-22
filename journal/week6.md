@@ -406,6 +406,15 @@ To resolve this error `CruddurServiceExecutionPolicy` had to be updated to inclu
 
 ![F06A40ED-008C-4F26-9F28-672F9F4665AF](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/a2facfd7-3ed3-423d-984d-9c600ff406c4)
 
+**This was the next error thrown:**
+
+"Task stopped at: 6/22/2023, 10:01:58 UTC
+ResourceInitializationError: failed to validate logger args: create stream has been retried 1 times: failed to create Cloudwatch log stream: AccessDeniedException: User: arn:aws:sts::1819......:assumed-role/CruddurServiceExecutionRole/3caf853ecb00491db67740079d4a02a7 is not authorized to perform: logs:CreateLogStream on resource: arn:aws:logs:us-east-1:181905276501:log-group:cruddur:log-stream:backend-flask/backend-flask/3caf853ecb00491db67740079d4a02a7 because no identity-based policy allows the logs:CreateLogStream action status code: 400, request id: 061e0f7c-b758-4b95-8fab-c791d3f8665e : exit status 1"
+
+**To resolve this error we had to add `CloudWatchFullAccess` policy to the `CruddurServiceExecutionRole`.**
+
+
+![374CF3ED-311B-4552-940D-91B2565517E2](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/11a431d4-eaa3-4f4d-84c3-0a878bb8af4d)
 
 
 
