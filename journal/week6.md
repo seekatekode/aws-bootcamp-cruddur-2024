@@ -431,5 +431,52 @@ CannotPullContainerError: pull image manifest has been retried 1 time(s): failed
 "ecr: GetDownloadUrIForLayer",
 "ecr: BatchGetImage",
 "logs: CreateLogStream"
-"logs: PutLogEvents```
+"logs: PutLogEvents
+```
+
+
+**The task kept failing and I had to keep creating the service repeatedly, so the next thing was to create the service via AWS CLI. We created a folder called `service-backend-flask.json`...
+
+## Defaults
+
+```sh
+export DEFAULT_VPC_ID=$(aws ec2 describe-vpcs \
+--filters "Name=isDefault, Values=true" \
+--query "Vpcs[0].VpcId" \
+--output text)
+
+echo $DEFAULT_VPC_ID
+```
+
+```sh
+export DEFAULT_SUBNET_IDS=$(aws ec2 describe-subnets  \
+ --filters Name=vpc-id,Values=$DEFAULT_VPC_ID \
+ --query 'Subnets[*].SubnetId' \
+ --output json | jq -r 'join(",")')
+ 
+echo $DEFAULT_SUBNET_IDS
+```
+
+**After editing the code in `service-backend-flask.json`we ran**
+
+```
+aws ecs create-service --cli-input-json file://aws/json/service-backend-flask.json
+``` 
+
+**This returned data in the terminal and in the AWS console.**
+
+**We then connected to the container**
+ ```sh
+aws ecs execute-command  \
+--region $AWS_DEFAULT_REGION \
+--cluster cruddur \
+--task 49523e5345cd452faba91b39967a5200 \
+--container backend-flask \
+--command "/bin/bash" \
+--interactive
+```
+
+**I received this error:**
+
+`SessionManagerPlugin is not found. Please refer to SessionManager Documentation here: http://docs.aws.amazon.com/console/systems-manager/session-manager-plugin-not-found`
 
