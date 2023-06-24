@@ -66,7 +66,7 @@ else:
 
 ![C4582FD0-F2FA-445B-89CA-8208B39DD6F1](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/1ecce3b4-9d2f-4d83-8444-849d27f2cb2f)
 
-**We then ran the command `/bin/flask/health-check` and it didn't pass the first multiple tries until I stopped the workspace overnight and restarted the same workspace the next morning.** 
+**We then ran the command `./bin/flask/health-check` and it didn't pass the first multiple tries until I stopped the workspace overnight and restarted the same workspace the next morning.** 
 
 
 ![66C73E96-4A57-4E8F-9C74-9930E0CB6821](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/0ecc1a22-218b-443b-be34-bb4d2ce46fa9)
