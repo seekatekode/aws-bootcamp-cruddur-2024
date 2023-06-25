@@ -511,3 +511,4 @@ If the installation was successful, the following message is returned.
 The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
 ```
 
+
