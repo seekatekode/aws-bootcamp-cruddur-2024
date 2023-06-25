@@ -470,7 +470,7 @@ aws ecs create-service --cli-input-json file://aws/json/service-backend-flask.js
 aws ecs execute-command  \
 --region $AWS_DEFAULT_REGION \
 --cluster cruddur \
---task 49523e5345cd452faba91b39967a5200 \
+--task 77777777777777777777777777777 \
 --container backend-flask \
 --command "/bin/bash" \
 --interactive
@@ -511,4 +511,33 @@ If the installation was successful, the following message is returned.
 The Session Manager plugin is installed successfully. Use the AWS CLI to start a session.
 ```
 
+**I still was not able to run 
+ ```sh
+aws ecs execute-command  \
+--region $AWS_DEFAULT_REGION \
+--cluster cruddur \
+--task 77777777777777777777777777777 \
+--container backend-flask \
+--command "/bin/bash" \
+--interactive
+```
+to connect to the container since my task deployments kept failing repeatedly in the AWS console. 
 
+![131D2C4E-EDB2-4348-9345-EA9CE93283D5](https://github.com/seekatekode/aws-bootcamp-cruddur-2024/assets/133314947/cdb60503-ad70-416f-90db-da4e3cae915b)
+
+When attaching a shell to the backend container and running `./bin/flask/health-check` I get the results: 
+
+[OK] Flask server is running
+
+But the flask server isn't running, so the container's health status is `Unhealthy`. 
+This is the print statement shown in the `health-check` file:
+
+ exit (1)
+"[BAD] Flask server is not running"
+
+
+ CloudWatch log says:
+ 
+ `"error connecting in 'pool-1': connection failed: server closed the connection unexpectedly"`
+
+ 
