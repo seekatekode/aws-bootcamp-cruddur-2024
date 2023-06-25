@@ -36,9 +36,13 @@ class CognitoJwtToken:
         keys_url = f"https://cognito-idp.{self.region}.amazonaws.com/{self.user_pool_id}/.well-known/jwks.json"
         try:
             response = self.request_client(keys_url)
-            self.jwk_keys = response.json()["keys"] 
+            keys = response.json()
+            if not keys.get("keys"):
+                raise KeyError("The 'keys' field is not present in the jwks.json file")
+            self.jwk_keys = keys["keys"] 
         except requests.exceptions.RequestException as e:
             raise FlaskAWSCognitoError(str(e)) from e
+
 
     @staticmethod
     def _extract_headers(token):
