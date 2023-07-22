@@ -1,5 +1,5 @@
 # Week 6 — Deploying Containers
-## Test RDS Connecetion
+## Test RDS Connection
 
 We added this `test` script into `db` so we can easily check our connection from our container. Then ran `chmod u+x backend-flask/bin/db/test`
 
